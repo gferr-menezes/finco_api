@@ -2,7 +2,7 @@ package br.com.finco.finco_api.user.controller;
 
 import br.com.finco.finco_api.common.dto.FilterDTO;
 import br.com.finco.finco_api.common.dto.PaginationDTO;
-import br.com.finco.finco_api.user.dto.UserDTO;
+import br.com.finco.finco_api.user.dto.UserInputDTO;
 import br.com.finco.finco_api.user.dto.UserOutput;
 import br.com.finco.finco_api.user.services.UserService;
 import jakarta.validation.Valid;
@@ -23,7 +23,7 @@ public class UserController {
     private UserService service;
 
     @PostMapping
-    public UserOutput create(@RequestBody @Valid UserDTO user) {
+    public UserOutput create(@RequestBody @Valid UserInputDTO user) {
         return  service.createUser(user);
     }
 

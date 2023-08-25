@@ -1,12 +1,12 @@
 package br.com.finco.finco_api.user.dto;
 
+import jakarta.validation.Valid;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 
-public class UserDTO {
-    @NotEmpty(message = "Name is required")
-    private String name;
+public class UserInputDTO {
 
     @NotEmpty(message = "Email is required")
     @Email(message = "Email is invalid")
@@ -16,13 +16,11 @@ public class UserDTO {
     @Size(min = 6, message = "Password must be at least 6 characters")
     private String password;
 
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
+    @Valid
+    @NotNull(
+        message = "Profile is required"
+    )
+    private ProfileInputDTO profile;
 
     public String getEmail() {
         return email;
@@ -38,5 +36,13 @@ public class UserDTO {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public ProfileInputDTO getProfile() {
+        return profile;
+    }
+
+    public void setProfile(ProfileInputDTO profile) {
+        this.profile = profile;
     }
 }

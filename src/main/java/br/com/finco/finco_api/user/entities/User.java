@@ -6,21 +6,21 @@ import jakarta.persistence.*;
 @Entity
 @Table(name = "users")
 public class User {
-    @Id()
-    @GeneratedValue(strategy = GenerationType.AUTO)
+     @Id()
+     @GeneratedValue(strategy = GenerationType.AUTO, generator = "increment")
     private Long id;
-
-    private String name;
 
     private String email;
 
     private String password;
 
+    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
+    private Profile profile;
+
     public User() {
     }
 
-    public User(String name, String email, String password) {
-        this.setName(name);
+    public User(String email, String password) {
         this.setEmail(email);
         this.setPassword(password);
     }
@@ -31,14 +31,6 @@ public class User {
 
     public void setId(Long id) {
         this.id = id;
-    }
-
-    public String getName() {
-        return this.name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
     }
 
     public String getEmail() {
@@ -55,6 +47,10 @@ public class User {
 
     public void setPassword(String password) {
         this.password = encryptPassword(password);
+    }
+
+    public Profile getProfile() {
+        return this.profile;
     }
 
     private String encryptPassword(String password) {
