@@ -1,0 +1,46 @@
+version: '3.9'
+
+services:
+  finco-db:
+    container_name: finco-db
+    image: mysql:8.0.25
+    platform: linux/x86_64
+    restart: always
+    environment:
+      - MYSQL_ROOT_PASSWORD=root
+      - MYSQL_DATABASE=finco
+      - MYSQL_ROOT_HOST=%
+    ports:
+      - 3310:3306
+    healthcheck:
+          test: ["CMD", "mysqladmin" ,"ping", "-h", "localhost"]
+          timeout: 20s
+          retries: 10
+    networks:
+      - finco-network
+
+  finco-api:
+    container_name: finco-api
+    command: java -agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=0.0.0.0:8000 -jar fincoapi.jar
+    image: finco-api
+    restart: always
+    build:
+      context: .
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:mysql://finco-db:3306/finco
+      SPRING_DATASOURCE_USERNAME: root
+      SPRING_DATASOURCE_PASSWORD: root
+      JAVA_OPTS: -agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=5005,quiet=y
+    #command: mvn spring-boot:run
+    depends_on:
+      finco-db:
+        condition: service_healthy
+    ports:
+      - 8080:8080
+      - 5005:5005
+    networks:
+      - finco-network
+
+networks:
+  finco-network:
+    driver: bridge

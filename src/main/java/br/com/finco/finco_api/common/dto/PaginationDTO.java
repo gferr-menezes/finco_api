@@ -8,9 +8,6 @@ public class PaginationDTO {
     private int perPage = 50;
     private String sortBy = "id";
     private Direction sortDirection = Direction.ASC;
-    
-    public PaginationDTO() {
-    }
 
     public int getPage() {
         return page == 1 ? 0 : page - 1;

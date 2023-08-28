@@ -1,8 +1,8 @@
 package br.com.finco.finco_api.user.dto;
 
-public record UserOutput(
+public record UserOutputDTO(
     Long id,
     String email,
-    ProfileOuput profile
+    ProfileOuputDTO profile
 ) {
 }

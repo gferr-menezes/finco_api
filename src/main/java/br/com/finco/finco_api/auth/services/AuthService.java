@@ -20,7 +20,7 @@ public class AuthService {
     public String verifyUser(String email, String password) {
         User user = userService.getUserByEmail(email);
         
-        if(isValid(password, user.getPassword())) {
+        if( user != null && isValid(password, user.getPassword())) {
             return tokenService.generateToken(user);
         }
 

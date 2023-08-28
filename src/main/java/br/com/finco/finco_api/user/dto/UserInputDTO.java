@@ -5,7 +5,9 @@ import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
+import lombok.Getter;
 
+@Getter
 public class UserInputDTO {
 
     @NotEmpty(message = "Email is required")
@@ -21,28 +23,4 @@ public class UserInputDTO {
         message = "Profile is required"
     )
     private ProfileInputDTO profile;
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public ProfileInputDTO getProfile() {
-        return profile;
-    }
-
-    public void setProfile(ProfileInputDTO profile) {
-        this.profile = profile;
-    }
 }

@@ -1,0 +1,23 @@
+server:
+    port: 8080
+    servlet:
+        contextPath: /api
+spring:
+    jpa:
+        hibernate:
+            ddl-auto: none
+        properties:
+            hibernate:
+                dialect: org.hibernate.dialect.MySQL8Dialect
+        show-sql: true
+    datasource:
+        url: jdbc:mysql://${MYSQL_HOST:localhost}:3306/finco
+        username: root
+        password: 3925331513
+        driver-class-name: com.mysql.jdbc.Driver
+app:
+    jwt:
+        secret: ${JWT_SECRET:secret}
+        expiration: ${JWT_EXPIRATION:86400000}
+
+

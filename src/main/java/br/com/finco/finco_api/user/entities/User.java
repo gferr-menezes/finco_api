@@ -21,8 +21,8 @@ public class User {
     }
 
     public User(String email, String password) {
-        this.setEmail(email);
-        this.setPassword(password);
+        this.email = email;
+        this.password = encryptPassword(password);
     }
 
     public Long getId() {
